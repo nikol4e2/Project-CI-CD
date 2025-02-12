@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: nikol4e2/project-ci-cd:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: "myapp-db"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: "user"
+            - name: DB_PASS
+              value: "password"
+            - name: DB_NAME
+              value: "myapp"
